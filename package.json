@@ -1,9 +1,9 @@
 {
-  "private": true,
-  "version": "0.0.1",
   "name": "trading-charts-with-tools",
+  "version": "1.0.0",
+  "description": "Библиотека расширений для Lightweight Charts с дополнительными инструментами для рисования и технического анализа",
   "author": "melight402",
-  "description": "trading charts",
+  "private": true,
   "type": "module",
   "scripts": {
     "lint": "eslint ."
