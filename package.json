@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Библиотека расширений для Lightweight Charts с дополнительными инструментами для рисования и технического анализа",
   "author": "melight402",
+  "license": "ISC",
   "private": true,
   "type": "module",
   "scripts": {
