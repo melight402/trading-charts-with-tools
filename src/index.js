@@ -6795,8 +6795,31 @@ var mn,
                     ) {
                       var N = this.Ql(),
                         S = this.Gl(n),
-                        C =
-                          N && S ? "".concat(N, " | Qty: ").concat(S) : N || S;
+                        M = null;
+                      if (S && this.Zn.Es().length >= 3) {
+                        var i = this.Zn.Ht(),
+                          a = i ? i.Vt() : null;
+                        if (i && a) {
+                          var f = Number(i.Bi(this.Zn.Es()[0].price, a)),
+                            c = parseFloat(S);
+                          if (!isNaN(f) && !isNaN(c) && f > 0 && c > 0) {
+                            var v = f * c;
+                            M = v.toFixed(2) + " USDT";
+                          }
+                        }
+                      }
+                      var C = null;
+                      if (N && M) {
+                        C = "".concat(N, " | Pos: ").concat(M);
+                      } else if (M) {
+                        C = "Pos: ".concat(M);
+                      } else if (N && S) {
+                        C = "".concat(N, " | Qty: ").concat(S);
+                      } else if (N) {
+                        C = N;
+                      } else if (S) {
+                        C = "Qty: ".concat(S);
+                      }
                       if (C) {
                         var T = this.Ls[0].clone(),
                           L = Gt(At);
@@ -6955,43 +6978,40 @@ var mn,
           e = Math.abs(h - s),
           u = Math.abs(s - r);
         if (0 === u) return null;
-        var o = e / u,
-          l = function (t, i) {
-            return 0 === i ? t : l(i, t % i);
-          },
-          a = Math.round(100 * e),
-          f = Math.round(100 * u),
-          c = l(a, f),
-          v = a / c,
-          d = f / c;
-        return Math.abs(o - Math.round(o)) < 0.01
-          ? "".concat(Math.round(o), ":1")
-          : v > 100 || d > 100
-            ? "".concat(o.toFixed(2), ":1")
-            : "".concat(v, ":").concat(d);
+        var o = e / u;
+        if (o < 0.01) return "0.01:1";
+        if (o >= 100) return "".concat(o.toFixed(2), ":1");
+        if (Math.abs(o - Math.round(o)) < 0.01) {
+          return "".concat(Math.round(o), ":1");
+        }
+        return "".concat(o.toFixed(2), ":1");
       }),
       (i.prototype.Gl = function (t) {
         var i,
           n = this.Zn.Es();
-        if (n.length < 3 || !t.risk || t.risk <= 0 || !t.symbol) return null;
+        if (n.length < 3 || !t.risk || isNaN(parseFloat(t.risk)) || parseFloat(t.risk) <= 0 || !t.symbol) return null;
         var s = n[0].price,
           h = n[1].price,
           r = this.Zn.il() ? Math.abs(s - h) : Math.abs(h - s);
         if (0 === r) return null;
-        var e = t.risk / r,
-          u =
+        var e = t.risk / r;
+        if (e <= 0) return null;
+        var u =
             null === (i = window.__BINANCE_STEP_SIZES) || void 0 === i
               ? void 0
               : i[t.symbol];
-        if (!u) return e.toFixed(6);
+        if (!u) return e.toFixed(8);
         var o = parseFloat(u);
-        if (isNaN(o) || o <= 0) return e.toFixed(6);
+        if (isNaN(o) || o <= 0) return e.toFixed(8);
         var l = 0;
         if (u.includes(".")) {
           var a = u.split(".");
           2 === a.length && (l = a[1].length);
         }
         var f = Math.floor(e / o) * o;
+        if (f <= 0) {
+          return e.toFixed(8);
+        }
         return l > 0 ? f.toFixed(l) : Math.round(f).toString();
       }),
       i
