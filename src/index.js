@@ -6794,16 +6794,16 @@ var mn,
                       n.showAutoText && this.Ls.length >= 3)
                     ) {
                       var N = this.Ql(),
-                        S = this.Gl(n),
-                        M = null;
+                        S = this.Gl(n);
+                      M = null;
                       if (S && this.Zn.Es().length >= 3) {
-                        var i = this.Zn.Ht(),
-                          a = i ? i.Vt() : null;
+                        i = this.Zn.Ht();
+                        a = i ? i.Vt() : null;
                         if (i && a) {
-                          var f = Number(i.Bi(this.Zn.Es()[0].price, a)),
-                            c = parseFloat(S);
+                          f = Number(i.Bi(this.Zn.Es()[0].price, a));
+                          c = parseFloat(S);
                           if (!isNaN(f) && !isNaN(c) && f > 0 && c > 0) {
-                            var v = f * c;
+                            v = f * c;
                             M = v.toFixed(2) + " USDT";
                           }
                         }
