@@ -1,20 +1,15 @@
 {
   "name": "trading-charts-with-tools",
   "version": "1.0.0",
-  "description": "Библиотека расширений для Lightweight Charts с дополнительными инструментами для рисования и технического анализа",
-  "author": "melight402",
-  "license": "ISC",
-  "private": true,
   "type": "module",
-  "scripts": {
-    "lint": "eslint ."
+  "main": "./standalone.js",
+  "module": "./standalone.js",
+  "exports": {
+    ".": "./standalone.js"
   },
-  "dependencies": {
-    "fancy-canvas": "^0.2.2"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "eslint": "^9.39.4",
-    "globals": "^17.4.0"
-  }
+  "files": [
+    "index.js",
+    "standalone.js"
+  ],
+  "sideEffects": false
 }
